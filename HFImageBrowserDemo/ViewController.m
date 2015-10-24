@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HFImageBrowser.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    float screenWidth = [UIScreen mainScreen].bounds.size.width;
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 100, screenWidth - 30, 200.0)];
+    [imgView setImage:[UIImage imageNamed:@"test.jpg"]];
+    [self.view addSubview:imgView];
+    
+    HFImageBrowser *imgBrowser = [HFImageBrowser sharedInstance];
+    [imgBrowser setBrowseImageView:imgView];
 }
 
 - (void)didReceiveMemoryWarning {

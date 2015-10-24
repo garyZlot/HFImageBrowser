@@ -15,6 +15,8 @@
 		E8A082061BDB702D0024EC90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A082041BDB702D0024EC90 /* LaunchScreen.storyboard */; };
 		E8A082111BDB702D0024EC90 /* HFImageBrowserDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A082101BDB702D0024EC90 /* HFImageBrowserDemoTests.m */; };
 		E8A0821C1BDB702D0024EC90 /* HFImageBrowserDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A0821B1BDB702D0024EC90 /* HFImageBrowserDemoUITests.m */; };
+		E8A0822A1BDB71CC0024EC90 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E8A082291BDB71CC0024EC90 /* test.jpg */; settings = {ASSET_TAGS = (); }; };
+		E8A0822E1BDB72910024EC90 /* HFImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A0822D1BDB72910024EC90 /* HFImageBrowser.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		E8A082171BDB702D0024EC90 /* HFImageBrowserDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HFImageBrowserDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A0821B1BDB702D0024EC90 /* HFImageBrowserDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HFImageBrowserDemoUITests.m; sourceTree = "<group>"; };
 		E8A0821D1BDB702D0024EC90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8A082291BDB71CC0024EC90 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = test.jpg; path = ../../../../Downloads/test.jpg; sourceTree = "<group>"; };
+		E8A0822C1BDB72910024EC90 /* HFImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFImageBrowser.h; sourceTree = "<group>"; };
+		E8A0822D1BDB72910024EC90 /* HFImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFImageBrowser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +106,7 @@
 		E8A081F51BDB702D0024EC90 /* HFImageBrowserDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E8A0822B1BDB72910024EC90 /* HFImageBrowser */,
 				E8A081F91BDB702D0024EC90 /* AppDelegate.h */,
 				E8A081FA1BDB702D0024EC90 /* AppDelegate.m */,
 				E8A081FC1BDB702D0024EC90 /* ViewController.h */,
@@ -117,6 +123,7 @@
 		E8A081F61BDB702D0024EC90 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E8A082291BDB71CC0024EC90 /* test.jpg */,
 				E8A081F71BDB702D0024EC90 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +145,15 @@
 				E8A0821D1BDB702D0024EC90 /* Info.plist */,
 			);
 			path = HFImageBrowserDemoUITests;
+			sourceTree = "<group>";
+		};
+		E8A0822B1BDB72910024EC90 /* HFImageBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				E8A0822C1BDB72910024EC90 /* HFImageBrowser.h */,
+				E8A0822D1BDB72910024EC90 /* HFImageBrowser.m */,
+			);
+			path = HFImageBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +262,7 @@
 				E8A082061BDB702D0024EC90 /* LaunchScreen.storyboard in Resources */,
 				E8A082031BDB702D0024EC90 /* Assets.xcassets in Resources */,
 				E8A082011BDB702D0024EC90 /* Main.storyboard in Resources */,
+				E8A0822A1BDB71CC0024EC90 /* test.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A0822E1BDB72910024EC90 /* HFImageBrowser.m in Sources */,
 				E8A081FE1BDB702D0024EC90 /* ViewController.m in Sources */,
 				E8A081FB1BDB702D0024EC90 /* AppDelegate.m in Sources */,
 				E8A081F81BDB702D0024EC90 /* main.m in Sources */,
