@@ -13,6 +13,9 @@
     CGRect oldframe;
     UIView *containerView;
     UIActionSheet *actionSheet;
+    
+    CGFloat originWidth;
+    CGPoint originCenter;
 }
 
 @end
@@ -73,6 +76,8 @@
         newImageView.frame = CGRectMake(0, (screenHeight - imgViewHeight)/2, screenWidth, imgViewHeight);
         containerView.alpha = 1;
     } completion:^(BOOL finished) {
+        originWidth = newImageView.frame.size.width;
+        originCenter = newImageView.center;
     }];
 }
 
@@ -113,12 +118,23 @@
         view.transform = CGAffineTransformScale(view.transform, pinchGestureRecognizer.scale, pinchGestureRecognizer.scale);
         pinchGestureRecognizer.scale = 1;
     }
+    
+    if (pinchGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        if (view.frame.size.width <= originWidth) {
+            [UIView animateWithDuration:0.2 animations:^{
+                [view setCenter:originCenter];
+                view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            }];
+        }
+        
+    }
 }
 
 // 处理拖拉手势
 - (void)panView:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     UIView *view = panGestureRecognizer.view;
+    if (view.frame.size.width == originWidth) return;
     if (panGestureRecognizer.state == UIGestureRecognizerStateBegan || panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [panGestureRecognizer translationInView:view.superview];
         [view setCenter:(CGPoint){view.center.x + translation.x, view.center.y + translation.y}];
