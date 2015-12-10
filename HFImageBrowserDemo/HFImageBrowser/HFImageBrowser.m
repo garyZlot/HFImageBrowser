@@ -16,6 +16,8 @@
     
     CGFloat originWidth;
     CGPoint originCenter;
+    
+    CGFloat scaleToZoomIn;
 }
 
 @end
@@ -42,6 +44,7 @@
 
 - (void)showImage:(UITapGestureRecognizer *)tapRecognizer
 {
+    scaleToZoomIn = 1.5;
     UIImageView *imageView = (UIImageView *)tapRecognizer.view;
     
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -83,6 +86,17 @@
 
 - (void)addGestureRecognizerToView:(UIView *)view
 {
+    // 点击手势/双击放大
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImage)];
+    singleTap.numberOfTapsRequired = 1;
+    [view addGestureRecognizer:singleTap];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doDoubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [view addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+    
     // 旋转手势
     UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateView:)];
     [view addGestureRecognizer:rotationGestureRecognizer];
@@ -98,6 +112,26 @@
     // 长按手势
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressView:)];
     [view addGestureRecognizer:longPressGestureRecognizer];
+}
+
+// 处理双击手势
+- (void)doDoubleTap:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    if (tapGestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+        UIView *view = tapGestureRecognizer.view;
+        if (view.frame.size.width > originWidth) {
+            [self restoreView:view];
+        } else {
+            CGPoint tapPoint = [tapGestureRecognizer locationInView:view.superview];
+            CGPoint centerPoint = view.center;
+            CGFloat newCenterX = tapPoint.x - scaleToZoomIn * (tapPoint.x - centerPoint.x);
+            CGFloat newCenterY = tapPoint.y - scaleToZoomIn * (tapPoint.y - centerPoint.y);
+            [UIView animateWithDuration:0.2 animations:^{
+                view.transform = CGAffineTransformMakeScale(scaleToZoomIn, scaleToZoomIn);
+                view.center = CGPointMake(newCenterX, newCenterY);
+            }];
+        }
+    }
 }
 
 // 处理旋转手势
@@ -152,6 +186,14 @@
         
     }
     if (!actionSheet.visible) [actionSheet showInView:containerView];
+}
+
+- (void)restoreView:(UIView *)view
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        [view setCenter:originCenter];
+        view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
 }
 
 - (void)hideImage
